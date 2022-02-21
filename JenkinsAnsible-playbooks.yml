@@ -1,0 +1,17 @@
+---
+
+- hosts: all
+  ignore_errors: yes
+  become: yes
+  tasks:
+        - name: Update packages to the latest version
+          yum:
+                name: '*'
+                state: latest
+          when: ansible_distribution == "CentOS"
+
+        - name: Update all packages to the latest version
+          apt:
+                name: '*'
+                state: latest
+          when: ansible_distribution == "Ubuntu"
